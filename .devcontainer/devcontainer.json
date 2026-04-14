@@ -16,5 +16,5 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash && echo 'source $HOME/.profile' >> ~/.bashrc"
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y locales && sudo locale-gen en_US.UTF-8 && curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash && sudo ln -sf /home/vscode/.local/share/solana/install/active_release/bin/* /usr/local/bin/ && sudo ln -sf /home/vscode/.avm/bin/anchor /usr/local/bin/anchor"
 }
