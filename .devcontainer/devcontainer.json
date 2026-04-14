@@ -1,18 +1,20 @@
 {
-  "name": "SuperBank Solana Bootcamp",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "name": "Solana Bootcamp - SuperBank",
+  "image": "mcr.microsoft.com/devcontainers/rust:1",
   "customizations": {
     "vscode": {
       "extensions": [
         "rust-lang.rust-analyzer",
         "tamasfe.even-better-toml",
-        "766b.go-to-next-error",
-        "esbenp.prettier-vscode"
+        "iron-wallet.solana-wallet-adapter"
       ]
     }
   },
   "remoteUser": "vscode",
-  "postCreateCommand": "solana --version && anchor --version"
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "postCreateCommand": "curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash && echo 'source $HOME/.profile' >> ~/.bashrc"
 }
