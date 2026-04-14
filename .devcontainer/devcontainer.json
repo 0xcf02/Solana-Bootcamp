@@ -1,0 +1,18 @@
+{
+  "name": "SuperBank Solana Bootcamp",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "766b.go-to-next-error",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "solana --version && anchor --version"
+}
