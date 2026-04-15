@@ -1,0 +1,89 @@
+{
+  "name": "@stbr/solana-lessons",
+  "version": "1.0.0",
+  "description": "Interactive Solana bootcamp: 12 guided TypeScript lessons teaching @solana/kit, tokens, PDAs, CPIs, priority fees, Token-2022, Actions/Blinks and x402 micropayments.",
+  "type": "module",
+  "bin": {
+    "solana-lessons": "dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "README.pt-BR.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solanabr/solana-lessons.git"
+  },
+  "homepage": "https://github.com/solanabr/solana-lessons#readme",
+  "bugs": {
+    "url": "https://github.com/solanabr/solana-lessons/issues"
+  },
+  "author": "Superteam Brazil",
+  "license": "MIT",
+  "keywords": [
+    "solana",
+    "bootcamp",
+    "web3",
+    "tutorial",
+    "cli",
+    "kit",
+    "superteam",
+    "blockchain",
+    "education"
+  ],
+  "scripts": {
+    "10": "tsx src/10-token-extensions.ts",
+    "11": "tsx src/11-solana-actions.ts",
+    "12": "tsx src/12-x402-micropayments.ts",
+    "build": "tsc -p tsconfig.cli.json",
+    "postbuild": "chmod +x dist/cli/index.js",
+    "prepublishOnly": "npm run build",
+    "cli": "tsx cli/index.ts",
+    "01": "tsx src/01-hello-solana.ts",
+    "02": "tsx src/02-send-sol.ts",
+    "03": "tsx src/03-atomic-transactions.ts",
+    "04": "tsx src/04-create-token-manual.ts",
+    "05": "tsx src/05-create-token-easy.ts",
+    "06": "tsx src/06-tokens-and-transfers.ts",
+    "07": "tsx src/07-pdas-explained.ts",
+    "08": "tsx src/08-cpis-in-action.ts",
+    "09": "tsx src/09-priority-fees.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solana/kit": "^2.1.0",
+    "@solana-program/system": "^0.7.0",
+    "@solana-program/token": "^0.5.0",
+    "@solana-program/memo": "^0.7.0",
+    "@solana-program/compute-budget": "^0.7.0",
+    "@solana/web3.js": "^1.98.0",
+    "@solana/spl-token": "^0.4.12",
+    "@solana/spl-token-metadata": "^0.1.6",
+    "@solana/actions": "^1.6.6",
+    "express": "^4.21.0",
+    "commander": "^12.1.0",
+    "@inquirer/prompts": "^7.0.0",
+    "chalk": "^5.3.0",
+    "boxen": "^8.0.1",
+    "cli-highlight": "^2.1.11",
+    "marked": "^14.1.0",
+    "marked-terminal": "^7.1.0",
+    "ora": "^8.1.0",
+    "gradient-string": "^3.0.0",
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/marked-terminal": "^6.1.1",
+    "vitest": "^3.0.0"
+  }
+}
