@@ -136,7 +136,7 @@ surfpool --version
 
 ```bash
 # Clone este repositório
-git clone <url-do-repo>
+git clone <https://github.com/0xcf02/Solana-Bootcamp.git>
 cd solana-bootcamp
 
 # Instale as dependências Node.js
@@ -223,7 +223,7 @@ Deixe este terminal rodando durante todo o bootcamp.
 
 Em **outro terminal**, execute os scripts na ordem:
 
-> **⚠️ Importante:** Certifique-se de estar dentro da pasta raiz do projeto antes de executar os comandos abaixo. Se estiver em outra pasta, navegue para ela com `cd caminho/para/solana-bootcamp`.
+> **⚠️ Importante:** Certifique-se de estar dentro da pasta raiz do projeto antes de executar os comandos abaixo. Se estiver em outra pasta, navegue para ela com `cd scripts/src`.
 
 ```bash
 # 01 - Hello Solana (Conceitos básicos, keypairs, airdrop)
