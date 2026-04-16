@@ -30,7 +30,7 @@ Antes de começar, certifique-se de que você tem:
 - **Node.js 20+** (verifique com `node -v`)
 - **npm ou yarn** instalado
 - **Git** instalado
-- Uma conta em **Phantom Wallet** ou outro navegador Web3 (veja links abaixo)
+- Uma conta em **Phantom Wallet** ou outra wallet de sua preferencia. 
 - **Terminal/Git Bash** (recomendado)
 - **Rust** (veja Instalação abaixo)
 - **Solana CLI** (veja Instalação abaixo)
