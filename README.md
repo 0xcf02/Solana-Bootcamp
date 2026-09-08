@@ -1,55 +1,62 @@
-# � Solana Bootcamp
+[Português (BR)](README.pt-BR.md)
 
-Bem-vindo ao Bootcamp de Solana! Este repositório contém tudo que você precisa para começar a desenvolver aplicações descentralizadas (dApps) na blockchain Solana.
+# 🎓 Solana Bootcamp
 
-## � Índice (Navegável)
+**A [Superteam Brazil](https://www.superteam.com.br/pt) community project** 🇧🇷 — building the Solana ecosystem in Brazil.
+Official site: [superteam.com.br](https://www.superteam.com.br/pt) · X/Twitter: [@SuperteamBR](https://x.com/SuperteamBR) · Wiki: [wiki.superteam.com.br](https://wiki.superteam.com.br/)
 
-**Início Rápido:**
-- [� Pré-requisitos](#-pré-requisitos)
-- [� Instalação](#-instalação)
+Welcome to the Solana Bootcamp! This repository has everything you need to start building decentralized applications (dApps) on the Solana blockchain.
 
-**Desenvolvimento:**
-- [⚙️ Configuração Inicial](#️-configuração-inicial)
-- [� Rodando os Scripts](#-rodando-os-scripts)
-- [� Conceitos Fundamentais](#-conceitos-fundamentais-da-solana)
+## 📚 Table of Contents
 
-**Seu Projeto:**
-- [� Projeto Final: SuperBank Neobank](#-projeto-final-superbank-neobank)
-- [� Recursos e Links](#-recursos-e-links-importantes)
-- [� Projeto de Casa: Neobank](#-projeto-de-casa-construir-seu-próprio-neobank)
+**Quick Start:**
+- [📋 Prerequisites](#-prerequisites)
+- [📦 Installation](#-installation)
 
-**Suporte:**
-- [� Troubleshooting](#-troubleshooting)
+**Development:**
+- [⚙️ Initial Setup](#️-initial-setup)
+- [🚀 Running the Scripts](#-running-the-scripts)
+- [📖 Core Concepts](#-solana-core-concepts)
 
----
+**Your Project:**
+- [🎯 Final Project: SuperBank Neobank](#-final-project-superbank-neobank)
+- [🔗 Resources & Links](#-important-resources--links)
+- [🏠 Homework Project: Neobank](#-homework-project-build-your-own-neobank)
 
-## � Pré-requisitos
-
-Antes de começar, certifique-se de que você tem:
-
-- **Node.js 20+** (verifique com `node -v`)
-- **npm ou yarn** instalado
-- **Git** instalado
-- Uma conta em **Phantom Wallet** ou outra wallet de sua preferencia. 
-- **Terminal/Git Bash** (recomendado)
-- **Rust** (veja Instalação abaixo)
-- **Solana CLI** (veja Instalação abaixo)
-- **Anchor CLI** (veja Instalação abaixo)
-- **Surfpool CLI** *(Opcional - recomendado para melhor desenvolvimento local)*
+**Support:**
+- [🔧 Troubleshooting](#-troubleshooting)
 
 ---
 
-## � Instalação
+## 📋 Prerequisites
 
-### ⚡ Instalação Rápida (Recomendado)
+Before you start, make sure you have:
 
-A forma mais rápida é instalar tudo com **um único comando**. Este instalador oficial da Solana configura todo o seu ambiente em uma só vez:
+- **Node.js 20+** (check with `node -v`)
+- **npm or yarn** installed
+- **Git** installed
+- An account on **Phantom Wallet** or another wallet of your choice.
+- **Terminal/Git Bash** (recommended)
+- **Rust** (see Installation below)
+- **Solana CLI** (see Installation below)
+- **Anchor CLI** (see Installation below)
+- **Surfpool CLI** *(Optional - recommended for a better local dev experience)*
+
+> 💡 **Don't want to install anything locally?** Skip straight to [🎯 Final Project: SuperBank Neobank](#-final-project-superbank-neobank) — the repository ships with a **Dev Container** (Docker) with everything pre-installed (Rust, Solana CLI, and the SuperBank Next.js scaffold ready to run).
+
+---
+
+## 📦 Installation
+
+### ⚡ Quick Install (Recommended)
+
+The fastest way is to install everything with **a single command**. This official Solana installer sets up your whole environment in one go:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
 ```
 
-Aguarde a conclusão. Você verá algo como:
+Wait for it to finish. You'll see something like:
 
 ```
 Installed Versions:
@@ -61,7 +68,7 @@ Node.js: v24.10.0
 Yarn: 1.22.1
 ```
 
-**Verifique se tudo foi instalado:**
+**Verify everything installed correctly:**
 
 ```bash
 rustc --version && solana --version && anchor --version && surfpool --version && node --version && yarn --version
@@ -69,211 +76,216 @@ rustc --version && solana --version && anchor --version && surfpool --version &&
 
 ---
 
-### ✋ Instalação Individual (Se a Rápida Falhar)
+### ✋ Individual Installation (If the Quick Install Fails)
 
-Se o instalador rápido encontrar problemas, você pode instalar cada ferramenta individualmente:
+If the quick installer runs into trouble, you can install each tool individually:
 
-### 1️⃣ Instalando Rust
+### 1️⃣ Installing Rust
 
-O Rust é necessário para compilar programas Solana.
+Rust is required to compile Solana programs.
 
 ```bash
-# Instale o Rust usando rustup
+# Install Rust using rustup
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# Recarregue seu ambiente
+# Reload your environment
 . "$HOME/.cargo/env"
 
-# Verifique a instalação
+# Verify installation
 rustc --version
 ```
 
-**Esperado:** `rustc 1.86.0` ou superior
+**Expected:** `rustc 1.86.0` or higher
 
 ---
 
-### 2️⃣ Instalando Solana CLI
+### 2️⃣ Installing Solana CLI
 
-A CLI do Solana fornece todas as ferramentas necessárias para construir e fazer deploy de programas.
+The Solana CLI provides all the tools needed to build and deploy programs.
 
 ```bash
-# Instale a Solana CLI
+# Install the Solana CLI
 sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
 
-# Atualize seu PATH (se necessário)
-# No Linux/WSL/Mac:
+# Update your PATH (if needed)
+# On Linux/WSL/Mac:
 export PATH="/Users/test/.local/share/solana/install/active_release/bin:$PATH"
 
-# No Windows (Git Bash), adicione ao seu .bashrc ou .zshrc:
+# On Windows (Git Bash), add it to your .bashrc or .zshrc:
 echo 'export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
-# Verifique a instalação
+# Verify installation
 solana --version
 ```
 
-**Esperado:** `solana-cli 2.x.x` ou superior
+**Expected:** `solana-cli 2.x.x` or higher
 
 ---
 
-### 3️⃣ Instalando Anchor CLI
+### 3️⃣ Installing Anchor CLI
 
-Anchor é um framework que simplifica o desenvolvimento de programas Solana em Rust.
+Anchor is a framework that simplifies building Solana programs in Rust.
 
-**Opção A: Instalar com AVM (Recomendado)**
+**Option A: Install via AVM (Recommended)**
 
 ```bash
-# Instale o Anchor Version Manager
+# Install the Anchor Version Manager
 cargo install --git https://github.com/solana-foundation/anchor avm --force
 
-# Instale a versão mais recente do Anchor
+# Install the latest Anchor version
 avm install latest
 avm use latest
 
-# Verifique a instalação
+# Verify installation
 anchor --version
 ```
 
-**Opção B: Instalar Diretamente**
+**Option B: Install Directly**
 
 ```bash
-# Se AVM tiver problemas, instale direto do GitHub
+# If AVM has issues, install straight from GitHub
 cargo install --git https://github.com/solana-foundation/anchor anchor-cli --force
 
-# Verifique
+# Verify
 anchor --version
 ```
 
-**Esperado:** `anchor-cli 0.30.x` ou superior
+**Expected:** `anchor-cli 0.30.x` or higher
 
 ---
 
-### 4️⃣ Instalando Surfpool CLI (Opcional mas Recomendado)
+### 4️⃣ Installing Surfpool CLI (Optional but Recommended)
 
-Surfpool é uma ferramenta de desenvolvimento local que substitui o `solana-test-validator` com mais features.
+Surfpool is a local development tool that replaces `solana-test-validator` with more features.
 
 ```bash
-# Instale o Surfpool
+# Install Surfpool
 curl -sL https://run.surfpool.run/ | bash
 
-# Verifique a instalação
+# Verify installation
 surfpool --version
 ```
 
-**Esperado:** `surfpool 0.12.0` ou superior
+**Expected:** `surfpool 0.12.0` or higher
 
 ---
 
-### 5️⃣ Clonando o Repositório e Instalando Dependências
+### 5️⃣ Cloning the Repository and Installing Dependencies
 
 ```bash
-# Clone este repositório
-git clone <url-do-repo>
+# Clone this repository
+git clone <repo-url>
 cd solana-bootcamp
 
-# Instale as dependências Node.js
+# Install Node.js dependencies
 npm install
 ```
 
 ---
 
-## ⚙️ Configuração Inicial
+## ⚙️ Initial Setup
 
-### Configurar Cluster Solana
+### Configure the Solana Cluster
 
-Defina qual cluster Solana você quer usar:
+Set which Solana cluster you want to use:
 
 ```bash
-# Para localhost (local validator)
+# For localhost (local validator)
 solana config set --url localhost
 
-# Para Devnet (testnet público)
+# For Devnet (public testnet)
 solana config set --url devnet
 
-# Para Mainnet (produção - cuidado!)
+# For Mainnet (production - careful!)
 solana config set --url mainnet-beta
 
-# Verifique sua configuração
+# Check your configuration
 solana config get
 ```
 
-### Criar ou Importar uma Carteira
+### Create or Import a Wallet
 
 ```bash
-# Gerar uma nova carteira (keypair)
+# Generate a new wallet (keypair)
 solana-keygen new
 
-# Ou importar uma carteira existente
+# Or import an existing wallet
 solana-keygen recover
 
-# Visualizar seu endereço público (address)
+# View your public address
 solana address
 
-# Visualizar seu saldo
+# View your balance
 solana balance
 ```
 
-### Conseguir SOL de Teste
+### Get Test SOL
 
-**Para Devnet (testnet público):**
+**On Devnet (public testnet):**
 
 ```bash
-# Airdrop 2 SOL para sua carteira
+# Airdrop 2 SOL to your wallet
 solana airdrop 2 --url devnet
 
-# Verifique o saldo
+# Check the balance
 solana balance --url devnet
 ```
 
-> ⚠️ **Nota:** Devnet tem limite de 5 SOL por airdrop. Se atingir o limite, use o [Faucet da Solana](https://faucet.solana.com/).
+> ⚠️ **Note:** Devnet caps airdrops at 5 SOL. If you hit the limit, use the [Solana Faucet](https://faucet.solana.com/).
 
-**Para Localhost (local validator):**
+**On Localhost (local validator):**
 
 ```bash
-# O local validator já vem com SOL ilimitado, sem necessidade de airdrop
+# The local validator already ships with unlimited SOL, no airdrop needed
 ```
 
 ---
 
-## � Rodando os Scripts
+## 🚀 Running the Scripts
 
-### Passo 1: Iniciar o Local Validator
+The 12 TypeScript lessons live in the `scripts/` folder (a Node.js package separate from the SuperBank app).
 
-Abra um **terminal separado** e execute:
+### Step 1: Start the Local Validator
+
+Open a **separate terminal** and run:
 
 ```bash
-# Opção A: Usar Surfpool (recomendado, se instalado)
+# Option A: Use Surfpool (recommended, if installed)
 surfpool start
 
-# Opção B: Usar solana-test-validator (tradicional)
+# Option B: Use solana-test-validator (traditional)
 solana-test-validator
 ```
 
-Deixe este terminal rodando durante todo o bootcamp.
+Leave this terminal running throughout the bootcamp.
 
-### Passo 2: Rodar os Scripts
+### Step 2: Run the Scripts
 
-Em **outro terminal**, execute os scripts na ordem:
+In **another terminal**, enter the `scripts/` folder, install its dependencies (first time only), and run the scripts in order:
 
-> **⚠️ Importante:** Certifique-se de estar dentro da pasta raiz do projeto antes de executar os comandos abaixo. Se estiver em outra pasta, navegue para ela com `cd caminho/para/solana-bootcamp`.
+> **⚠️ Important:** the scripts live in `scripts/`, a Node.js package separate from the Next.js app at the repo root. `cd` into it before running any command below.
 
 ```bash
-# 01 - Hello Solana (Conceitos básicos, keypairs, airdrop)
+cd scripts
+npm install   # first time only
+
+# 01 - Hello Solana (basic concepts, keypairs, airdrop)
 npx tsx src/01-hello-solana.ts
 
-# 02 - Send SOL (Criar e enviar transações)
+# 02 - Send SOL (build and send transactions)
 npx tsx src/02-send-sol.ts
 
-# 03 - Atomic Transactions (Atomicidade e rollback)
+# 03 - Atomic Transactions (atomicity and rollback)
 npx tsx src/03-atomic-transactions.ts
 
-# 04 - Create Token (Manual) (Criar SPL Token manualmente)
+# 04 - Create Token (Manual) (create an SPL Token manually)
 npx tsx src/04-create-token-manual.ts
 
-# 05 - Create Token (Easy) (Criar SPL Token com helpers)
+# 05 - Create Token (Easy) (create an SPL Token with helpers)
 npx tsx src/05-create-token-easy.ts
 
-# 06 - Tokens and Transfers (ATAs e transferências)
+# 06 - Tokens and Transfers (ATAs and transfers)
 npx tsx src/06-tokens-and-transfers.ts
 
 # 07 - PDAs Explained (Program Derived Addresses)
@@ -282,7 +294,7 @@ npx tsx src/07-pdas-explained.ts
 # 08 - CPIs in Action (Cross-Program Invocations)
 npx tsx src/08-cpis-in-action.ts
 
-# 09 - Priority Fees (Taxas de prioridade)
+# 09 - Priority Fees
 npx tsx src/09-priority-fees.ts
 
 # 10 - Token Extensions (Token-2022)
@@ -291,25 +303,25 @@ npx tsx src/10-token-extensions.ts
 # 11 - Solana Actions (Blinks)
 npx tsx src/11-solana-actions.ts
 
-# 12 - x402 Micropayments (Micropagamentos)
+# 12 - x402 Micropayments
 npx tsx src/12-x402-micropayments.ts
 ```
 
-> � **Dica:** Você também pode usar os atalhos npm (execute na raiz do projeto):
+> 💡 **Tip:** from inside the `scripts/` folder, you can also use the npm shortcuts:
 > ```bash
 > npm run 01
 > npm run 02
 > # ... etc
 > ```
-> Se receber erro "npm ERR! code ENOENT", certifique-se de estar na pasta correta do projeto onde o `package.json` está localizado.
+> If you get "npm ERR! code ENOENT", make sure you're inside the `scripts/` folder, where this `package.json` lives.
 
 ---
 
-## � Conceitos Fundamentais da Solana
+## 📖 Solana Core Concepts
 
-### � Keypairs e Wallets
+### 🔑 Keypairs and Wallets
 
-Uma **keypair** é um par de chaves criptográficas: chave pública (seu endereço) e chave privada (seu segredo). Você usa a chave privada para assinar transações.
+A **keypair** is a cryptographic key pair: a public key (your address) and a private key (your secret). You use the private key to sign transactions.
 
 ```typescript
 import { generateKeyPairSigner } from '@solana/web3.js';
@@ -318,14 +330,14 @@ const keyPair = await generateKeyPairSigner();
 console.log('Public Key:', keyPair.address);
 ```
 
-### � Lamports e SOL
+### 💰 Lamports and SOL
 
-- **1 SOL = 1.000.000.000 lamports**
-- Os saldos na blockchain são armazenados em lamports (unidade menor)
+- **1 SOL = 1,000,000,000 lamports**
+- On-chain balances are stored in lamports (the smaller unit)
 
-### � Transações
+### 🔄 Transactions
 
-Uma **transação** é uma série de instruções executadas atomicamente. Se uma instrução falhar, toda a transação é revertida.
+A **transaction** is a series of instructions executed atomically. If one instruction fails, the whole transaction is rolled back.
 
 ```typescript
 import { createTransaction, pipe, transfer } from '@solana/web3.js';
@@ -336,16 +348,16 @@ const tx = await pipe(
 );
 ```
 
-### � PDA (Program Derived Address)
+### 🧩 PDA (Program Derived Address)
 
-Um **PDA** é um endereço gerado deterministicamente usando:
-- Uma seed (texto)
-- Um program ID
-- Um bump seed (número)
+A **PDA** is an address deterministically derived from:
+- A seed (text)
+- A program ID
+- A bump seed (number)
 
-PDAs **não têm chave privada** - são controlados por programas Solana.
+PDAs **have no private key** — they're controlled by Solana programs.
 
-**Uso:** Armazenar dados associados a um programa, criar contas para tokens, etc.
+**Use case:** storing data tied to a program, creating token accounts, etc.
 
 ```typescript
 import { findProgramAddress } from '@solana/web3.js';
@@ -356,38 +368,40 @@ const [pda, bump] = await findProgramAddress(
 );
 ```
 
-### � SPL Token
+### 🪙 SPL Token
 
-**SPL** = Solana Program Library. Um SPL Token é um token customizado criado em Solana (semelhante a ERC-20 no Ethereum).
+**SPL** = Solana Program Library. An SPL Token is a custom token created on Solana (similar to an ERC-20 on Ethereum).
 
-**Componentes:**
-- **Mint Account:** Armazena metadados do token (supply, decimais, mint authority)
-- **Token Account:** Armazena o saldo do token de um usuário
-- **Associated Token Account (ATA):** Um token account associado a uma carteira (criado automaticamente)
+**Components:**
+- **Mint Account:** stores the token's metadata (supply, decimals, mint authority)
+- **Token Account:** stores a user's token balance
+- **Associated Token Account (ATA):** a token account tied to a wallet (created automatically)
 
 ```typescript
 import { getOrCreateAssociatedTokenAccount, mintTo, transfer } from '@solana/spl-token';
 
-// Criar ATA
+// Create the ATA
 const ata = await getOrCreateAssociatedTokenAccount(
   connection, payer, mint, owner
 );
 
-// Mintar tokens
+// Mint tokens
 await mintTo(connection, payer, mint, ata.address, mintAuthority, 1000000000);
 
-// Transferir tokens
+// Transfer tokens
 await transfer(connection, payer, fromAta, toAta, owner, 500000000);
 ```
 
-### � CPI (Cross-Program Invocation)
+> ⚠️ **Heads up:** the examples above (`getOrCreateAssociatedTokenAccount`, `mintTo`, `transfer`) take a `payer` of type `Signer` — a full keypair, private key included. That works fine in Node.js scripts like the ones in this section. **It does not work like this in a browser app** using Wallet Adapter, which only ever exposes `publicKey` and `sendTransaction` (never the private key). See how to handle this correctly in [🎯 Final Project: SuperBank Neobank](#-final-project-superbank-neobank).
 
-Um **CPI** permite que um programa Solana chame outro programa. É como um contrato inteligente chamar outro contrato.
+### 🔁 CPI (Cross-Program Invocation)
 
-**Exemplo:** Seu programa chama o Token Program para transferir tokens.
+A **CPI** lets one Solana program call another program. Think of it like a smart contract calling another smart contract.
+
+**Example:** your program calls the Token Program to transfer tokens.
 
 ```typescript
-// Seu programa emite uma instrução que chama outro programa
+// Your program issues an instruction that calls another program
 const transferInstruction = createTransferInstruction(
   fromTokenAccount,
   toTokenAccount,
@@ -398,183 +412,197 @@ const transferInstruction = createTransferInstruction(
 );
 ```
 
-### � Instruções
+### 📜 Instructions
 
-Uma **instrução** é uma chamada para um programa Solana. Cada instrução especifica:
-- Qual programa executar
-- Quais contas serão afetadas
-- Quais dados passar para o programa
+An **instruction** is a call into a Solana program. Each instruction specifies:
+- Which program to execute
+- Which accounts are affected
+- What data to pass to the program
 
 ```typescript
-// Exemplo: Instrução de transferência
+// Example: a transfer instruction
 const instruction = createTransferInstruction(
-  source,        // Conta de origem
-  destination,   // Conta de destino
-  owner,         // Quem assina
-  amount,        // Quantidade em lamports
+  source,        // Source account
+  destination,   // Destination account
+  owner,         // Who signs
+  amount,        // Amount in lamports
   [],
   SYSTEM_PROGRAM_ID
 );
 ```
 
-### � Autoridades (Authorities)
+### 🔐 Authorities
 
-Cada recurso (mint, token account) tem **authorities** que podem fazer ações específicas:
-- **Mint Authority:** Pode criar novos tokens
-- **Freeze Authority:** Pode congelar token accounts
-- **Owner:** Possui a conta
+Every resource (mint, token account) has **authorities** that can perform specific actions:
+- **Mint Authority:** can create new tokens
+- **Freeze Authority:** can freeze token accounts
+- **Owner:** owns the account
 
 ---
 
-## � Projeto Final: SuperBank Neobank
+## 🎯 Final Project: SuperBank Neobank
 
-Seu projeto final será **construir um SuperBank** - um neobank completo na Solana!
+Your final project is to **build SuperBank** — a complete neobank on Solana!
 
-### Features Necessárias:
+### Required Features:
 
-✅ Conexão de carteira (Phantom/Backpack/Solflare)  
-✅ Exibir saldo em SOL  
-✅ Criar token customizado "SuperReal" (SREAL)  
-✅ Mintar tokens  
-✅ Transferir tokens entre wallets  
-✅ Histórico de transações  
-✅ Dashboard com saldos e links para Explorer  
-✅ Notificações com toast  
+✅ Wallet connection (Phantom/Backpack/Solflare)
+✅ Display SOL balance
+✅ Create a custom token, "SuperReal" (SREAL)
+✅ Mint tokens
+✅ Transfer tokens between wallets
+✅ Transaction history
+✅ Dashboard with balances and Explorer links
+✅ Toast notifications
 
-### Instruções para Começar:
+### Getting Started:
 
-1. **Acesse o trynoah.ai** (a IA te ajudará a buildar!)
+1. **Open the project in the Dev Container** (Docker/VS Code). The Next.js scaffold already ships with Solana Wallet Adapter configured for devnet — no manual setup needed. Once it's open, run:
 
-2. **Use este prompt:**
+   ```bash
+   npm run dev
+   ```
+
+   Open `http://localhost:3000` in your browser. Wallet connection (Phantom/Backpack/Solflare) already works out of the box.
+
+2. **Paste the prompt below into the AI tool of your choice** (Cursor, GitHub Copilot, Windsurf, Claude, or any code assistant you have available), with the project already open in your editor:
 
 ```
-Build a fullstack Solana neobank app called "SuperBank" on devnet with the following features:
+Act as a Senior Fullstack Solana Developer. I have a Next.js project with Solana Wallet Adapter configured.
+We need to build a single-page Neobank app on the devnet called "SuperBank".
 
-✓ Wallet connection (Phantom/Backpack/Solflare) with balance display
-✓ Create a custom SPL token called "SuperReal" (symbol: SREAL, 9 decimals) with a "Create Token" button
-✓ Mint tokens: input field for amount + "Mint" button that mints SREAL to the connected wallet
-✓ Transfer tokens: input field for recipient address + amount + "Send" button that transfers SREAL between wallets (auto-creates the recipient's Associated Token Account if needed)
-✓ Transaction history: show recent transactions with links to Solana Explorer (devnet)
-✓ Dashboard showing: SOL balance, SREAL balance, mint address, and a "View on Explorer" link for each
-✓ Design: clean dark theme, modern UI. The app should feel like a simple neobank – show balances prominently, make send/receive the primary actions.
+Build the complete UI and integration in a single pass. Do not wait for confirmations. All codes and comments must be written in English.
 
-After each transaction, show a toast notification with the transaction signature linked to explorer.solana.com (devnet).
+Requirements:
+1. UI/UX: Create a modern, clean dark theme. Prominently display the connected wallet address and the user's SOL balance.
+2. Custom SPL Token: Include a section to create a custom token called "SuperReal" (Symbol: SREAL, 9 decimals) with a "Create Token" button. Display the Mint Address with a link to Solana Explorer (devnet) once created.
+3. Mint Functionality: Add an input field for the amount and a "Mint" button to mint SREAL tokens to the connected wallet. Display the SREAL balance in the dashboard.
+4. Transfer (Send): Create an interface with "Recipient Address", "Amount", and a "Send" button.
+CRITICAL INSTRUCTION: The @solana/wallet-adapter-react only exposes a `publicKey` and `sendTransaction`, not a full Signer object. Do NOT use `getOrCreateAssociatedTokenAccount` or `mintTo` directly, as they require a Signer.
+Instead, you MUST manually construct the instructions:
+- Use `getAssociatedTokenAddress` to find the ATA.
+- Check if the recipient's ATA exists. If not, append `createAssociatedTokenAccountInstruction`.
+- Append `createTransferInstruction`.
+Build a single `Transaction` containing these instructions and send it via the wallet adapter's `sendTransaction`.
+5. Notifications: After any successful on-chain action (Create, Mint, Send), trigger a toast notification containing the transaction signature linked to explorer.solana.com/?cluster=devnet.
+
+Ensure you use @solana/web3.js and @solana/spl-token packages correctly. Use TailwindCSS for styling. Make the send/receive actions the primary focus of the UI.
 ```
 
-3. **Acompanhe o processo:** Não apenas copie/cole! Entenda cada etapa:
-   - Como conectar a carteira
-   - Como criar tokens SPL
-   - Como construir transações
-   - Como exibir dados na UI
+3. **Follow the process:** Don't just copy/paste! Understand each step:
+   - How wallet connection works
+   - How to create SPL tokens
+   - How to build transactions
+   - How to display data in the UI
 
-4. **Teste localmente** ou no devnet
-
----
-
-## � Recursos e Links Importantes
-
-### � Documentação Oficial
-
-- **[Solana.com](https://solana.com)** - Site oficial da Solana
-- **[Solana Docs](https://solana.com/docs)** - Documentação completa
-- **[Solana CLI Basics](https://solana-com-docs.vercel.app/docs/intro/installation/solana-cli-basics)** - Guia da CLI
-
-### � Ferramentas e Frameworks
-
-- **[Anchor Framework](https://www.anchor-lang.com/)** - Framework para desenvolver programas Solana
-- **[Solana Web3.js](https://solana-labs.github.io/solana-web3.js/)** - Biblioteca JavaScript para Solana
-- **[@solana/kit](https://github.com/solana-foundation/@solana/kit)** - SDK moderno (web3.js 2.0)
-
-### � Faucets e Testnet
-
-- **[Solana Faucet](https://faucet.solana.com/)** - Conseguir SOL de teste
-- **[Devnet Explorer](https://explorer.solana.com/?cluster=devnet)** - Ver transações e contas
-
-### � Tutoriais e Exemplos
-
-- **[Solana Developers](https://solana.com/developers/templates)** - Templates oficiais
-- **[Solana Skill](https://github.com/solana-foundation/solana-dev-skill)** - Skill de desenvolvimento
-- **[Solana Lesson Scripts](https://github.com/solanabr/solana-lesson-scripts)** - Scripts de aula (PT-BR)
-- **[Solana Bootcamp](https://github.com/0xcf02/Solana-Bootcamp)** - Repositório de bootcamp
-- **[Pirate Bootcamp](https://github.com/solana-developers/pirate-bootcamp)** - Bootcamp pirata
-- **[Solana Claude](https://github.com/solanabr/solana-claude)** - AI assistants para Solana
-
-### �️ IDEs e Playground
-
-- **[trynoah.ai](https://trynoah.ai)** - Playground para buildar dApps com IA
-- **[Quasar](https://quasar-lang.com/docs)** - Linguagem para contratos inteligentes
-- **[GitHub Codespaces](https://ideal-spoon-695q5j7v44qr2rj94.github.dev/)** - Ambiente de desenvolvimento online
-
-### � Wallets
-
-- **[Phantom Wallet](https://phantom.com/download)** - Download Phantom (recomendado)
-- **[Backpack](https://backpack.app/)** - Wallet alternativa
-- **[Solflare](https://solflare.com/)** - Wallet alternativa
+4. **Test it** locally or on devnet
 
 ---
 
-## � Projeto de Casa: Construir seu Próprio Neobank
+## 🔗 Important Resources & Links
 
-Após o bootcamp, você deve construir um neobank completo! Aqui está o guia:
+### 📘 Official Documentation
 
-### � Requisitos Mínimos:
+- **[Solana.com](https://solana.com)** - Solana's official site
+- **[Solana Docs](https://solana.com/docs)** - Complete documentation
+- **[Solana CLI Basics](https://solana-com-docs.vercel.app/docs/intro/installation/solana-cli-basics)** - CLI guide
 
-**Parte 1: Setup (Dia 1)**
-- [ ] Criar projeto com Anchor/Next.js/React
-- [ ] Conectar carteira Phantom
-- [ ] Exibir saldo em SOL
+### 🛠️ Tools & Frameworks
 
-**Parte 2: Token (Dia 2)**
-- [ ] Criar um SPL Token customizado
-- [ ] Exibir mint address
-- [ ] Interface para mintar tokens
+- **[Anchor Framework](https://www.anchor-lang.com/)** - Framework for building Solana programs
+- **[Solana Web3.js](https://solana-labs.github.io/solana-web3.js/)** - JavaScript library for Solana
+- **[@solana/kit](https://github.com/solana-foundation/@solana/kit)** - Modern SDK (web3.js 2.0)
 
-**Parte 3: Transferências (Dia 3)**
-- [ ] Permitir enviar tokens para outro endereço
-- [ ] Validar endereços
-- [ ] Criar ATAs automaticamente
+### 🚰 Faucets & Testnet
 
-**Parte 4: Dashboard (Dia 4)**
-- [ ] Exibir histórico de transações
-- [ ] Links para Solana Explorer
+- **[Solana Faucet](https://faucet.solana.com/)** - Get test SOL
+- **[Devnet Explorer](https://explorer.solana.com/?cluster=devnet)** - View transactions and accounts
+
+### 💡 Tutorials & Examples
+
+- **[Solana Developers](https://solana.com/developers/templates)** - Official templates
+- **[Solana Skill](https://github.com/solana-foundation/solana-dev-skill)** - Development skill
+- **[Solana Lesson Scripts](https://github.com/solanabr/solana-lesson-scripts)** - Class scripts (PT-BR)
+- **[Solana Bootcamp](https://github.com/0xcf02/Solana-Bootcamp)** - This bootcamp repo
+- **[Pirate Bootcamp](https://github.com/solana-developers/pirate-bootcamp)** - Pirate bootcamp
+- **[Solana Claude](https://github.com/solanabr/solana-claude)** - AI assistants for Solana
+
+### 🖥️ IDEs & Playgrounds
+
+- **[trynoah.ai](https://trynoah.ai)** - AI dApp-building playground
+- **[Quasar](https://quasar-lang.com/docs)** - Smart contract language
+- **[GitHub Codespaces](https://ideal-spoon-695q5j7v44qr2rj94.github.dev/)** - Online dev environment
+
+### 👛 Wallets
+
+- **[Phantom Wallet](https://phantom.com/download)** - Download Phantom (recommended)
+- **[Backpack](https://backpack.app/)** - Alternative wallet
+- **[Solflare](https://solflare.com/)** - Alternative wallet
+
+---
+
+## 🏠 Homework Project: Build Your Own Neobank
+
+After the bootcamp, you should build a full neobank! Here's the guide:
+
+### ✅ Minimum Requirements:
+
+**Part 1: Setup (Day 1)**
+- [ ] Create a project with Anchor/Next.js/React
+- [ ] Connect Phantom wallet
+- [ ] Display SOL balance
+
+**Part 2: Token (Day 2)**
+- [ ] Create a custom SPL Token
+- [ ] Display the mint address
+- [ ] Build a UI to mint tokens
+
+**Part 3: Transfers (Day 3)**
+- [ ] Allow sending tokens to another address
+- [ ] Validate addresses
+- [ ] Auto-create ATAs
+
+**Part 4: Dashboard (Day 4)**
+- [ ] Display transaction history
+- [ ] Links to Solana Explorer
 - [ ] Toast notifications
 
-**Parte 5: Design (Dia 5)**
-- [ ] UI dark theme moderna
-- [ ] Layout responsivo
-- [ ] UX intuitiva
+**Part 5: Design (Day 5)**
+- [ ] Modern dark theme UI
+- [ ] Responsive layout
+- [ ] Intuitive UX
 
-### � Metodologia: VibeCoding
+### ✨ Methodology: VibeCoding
 
-Use **vibecoding** para acelerar o desenvolvimento:
+Use **vibecoding** to speed up development:
 
-1. **Descreva** o que quer buildar em português natural
-2. **Use IA** (trynoah.ai) para gerar código
-3. **Acompanhe** cada etapa e entenda o que está acontecendo
-4. **Teste** localmente no seu computador ou no devnet
-5. **Refine** o código iterativamente
+1. **Describe** what you want to build in natural language
+2. **Use AI** (trynoah.ai) to generate the code
+3. **Follow** each step and understand what's happening
+4. **Test** locally on your machine or on devnet
+5. **Refine** the code iteratively
 
-### � Checklist de Desenvolvimento:
+### 📝 Development Checklist:
 
 ```bash
-# Clone ou crie um novo projeto
+# Clone or start a new project
 git init my-neobank
 cd my-neobank
 
-# Setup básico
+# Basic setup
 npm init -y
 npm install @solana/web3.js @solana/spl-token
 
-# Criar estrutura
+# Create the structure
 mkdir src
 mkdir src/components
 mkdir src/utils
 
-# Começar a buildar!
-# Use trynoah.ai com o prompt que você vai customizar
+# Start building!
+# Use trynoah.ai with a prompt you customize
 ```
 
-### � Arquitetura Recomendada:
+### 🏗️ Recommended Architecture:
 
 ```
 my-neobank/
@@ -585,100 +613,101 @@ my-neobank/
 │   │   ├── SendTokens.tsx
 │   │   └── History.tsx
 │   ├── utils/
-│   │   ├── solana.ts (conexão)
-│   │   ├── tokens.ts (operações com tokens)
-│   │   └── explorer.ts (links para explorer)
+│   │   ├── solana.ts (connection)
+│   │   ├── tokens.ts (token operations)
+│   │   └── explorer.ts (explorer links)
 │   └── App.tsx
 ├── package.json
 └── README.md
 ```
 
-### � Dicas Importantes:
+### 💡 Important Tips:
 
-1. **Sempre começa simples:** Funcionalidade > Beleza. Depois adiciona UI.
-2. **Teste no devnet:** Antes de qualquer coisa, peça SOL de teste no faucet.
-3. **Leia os erros:** Se algo quebrar, leia a mensagem de erro completa.
-4. **Entenda o código:** Não copie/cole cegamente. Entenda cada linha.
-5. **Versione com Git:** Faça commits frequentes. `git add .` → `git commit -m "feat: adiciona X"`
-6. **Use o Explorer:** Sempre que fizer uma transação, veja ela no [Solana Explorer](https://explorer.solana.com/?cluster=devnet).
+1. **Always start simple:** functionality first, polish later.
+2. **Test on devnet:** grab test SOL from the faucet before anything else.
+3. **Read the errors:** if something breaks, read the full error message.
+4. **Understand the code:** don't blindly copy/paste. Understand every line.
+5. **Version with Git:** commit often. `git add .` → `git commit -m "feat: add X"`
+6. **Use the Explorer:** whenever you make a transaction, check it on the [Solana Explorer](https://explorer.solana.com/?cluster=devnet).
 
 ---
 
-## � Troubleshooting
+## 🔧 Troubleshooting
 
-### Erro: "fetch failed ... ECONNREFUSED 127.0.0.1:8899"
+### Error: "fetch failed ... ECONNREFUSED 127.0.0.1:8899"
 
-Seu local validator não está rodando.
+Your local validator isn't running.
 
 ```bash
-# Terminal 1: Inicie o validator
+# Terminal 1: start the validator
 surfpool start
-# ou
+# or
 solana-test-validator
 
-# Terminal 2: Rode seus scripts
+# Terminal 2: run your scripts (inside the scripts/ folder)
+cd scripts
 npx tsx src/01-hello-solana.ts
 ```
 
-### Erro: "airdrop request failed"
+### Error: "airdrop request failed"
 
-O airdrop atingiu o limite ou o validator não tem SOL.
+The airdrop hit its limit or the validator has no SOL.
 
 ```bash
-# Resete o validator
+# Reset the validator
 solana-test-validator --reset
 
-# Ou use o faucet da Solana no devnet
+# Or use the Solana devnet faucet
 solana airdrop 2 --url devnet
 ```
 
-### Erro: "Module not found"
+### Error: "Module not found"
 
 ```bash
-# Instale as dependências
+# Install dependencies (at the root for the Next.js app, or inside scripts/ for the lessons)
 npm install
 
-# Certifique-se de estar usando Node.js 20+
+# Make sure you're on Node.js 20+
 node -v
 ```
 
-### Erro: "Port 8080 already in use"
+### Error: "Port 8080 already in use"
 
-O script 11 usa a porta 8080.
+Script 11 uses port 8080.
 
 ```bash
-# Use outra porta
+# Use a different port
 PORT=3000 npx tsx src/11-solana-actions.ts
 ```
 
 ---
 
-## � Contato e Dúvidas
+## 💬 Contact & Questions
 
-Se tiver dúvidas durante o bootcamp:
-- Pergunte no chat de aula
-- Consulte a [documentação da Solana](https://solana.com/docs)
-- Procure no [GitHub Issues](https://github.com/solana-foundation) de projetos relevantes
-
----
-
-## � Licença
-
-Este projeto está licenciado sob a MIT License.
+If you have questions during the bootcamp:
+- Ask in the class chat
+- Check the [Solana docs](https://solana.com/docs)
+- Search [GitHub Issues](https://github.com/solana-foundation) on relevant projects
+- Reach out to **Superteam Brazil**: [superteam.com.br](https://www.superteam.com.br/pt) · [@SuperteamBR](https://x.com/SuperteamBR) · [Wiki](https://wiki.superteam.com.br/)
 
 ---
 
-**Boa sorte no bootcamp! � Você vai fazer coisas incríveis na Solana!**
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
-### � Próximos Passos
+**Good luck with the bootcamp! 🚀 You're going to build amazing things on Solana!**
 
-1. ✅ Instale as dependências (Rust, Solana CLI, Anchor)
-2. ✅ Configure seu cluster (localhost ou devnet)
-3. ✅ Clone este repositório e instale dependências
-4. ✅ Rode o primeiro script (`npm run 01`)
-5. ✅ Entenda cada conceito enquanto roda os scripts
-6. ✅ Comece o projeto SuperBank após o bootcamp
-7. ✅ Crie seu próprio neobank! �
+---
 
+### 🗺️ Next Steps
+
+1. ✅ Install the dependencies (Rust, Solana CLI, Anchor)
+2. ✅ Configure your cluster (localhost or devnet)
+3. ✅ Clone this repository and install dependencies
+4. ✅ Run the first script (`cd scripts && npm run 01`)
+5. ✅ Understand each concept as you run the scripts
+6. ✅ Start the SuperBank project after the bootcamp
+7. ✅ Build your own neobank! 🚀

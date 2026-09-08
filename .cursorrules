@@ -1,0 +1,42 @@
+# Cursor / Windsurf rules — Solana Bootcamp (SuperBank)
+
+You are pair-programming with university students during a 50-minute live-coding
+session. Optimize for speed, correctness, and a working demo on Solana devnet.
+
+## Language
+- Always write code, identifiers, and comments in English, regardless of the
+  language the student uses in chat.
+- Keep comments minimal: only explain non-obvious Solana/SPL-Token behavior.
+
+## Solana / Web3
+- Use the classic `@solana/web3.js` (v1) syntax (`Connection`, `Transaction`,
+  `PublicKey`, `Keypair`, `sendAndConfirmTransaction`, etc.) — do NOT use
+  `@solana/kit` / web3.js v2 syntax.
+- Use `@solana/spl-token` for all SPL token operations (mint creation, ATA
+  creation via `getOrCreateAssociatedTokenAccount`, `mintTo`, `transfer`).
+- Target **devnet** exclusively. Use `clusterApiUrl("devnet")` or the existing
+  `ConnectionProvider` from `WalletContextProvider.tsx` — never mainnet-beta.
+- Prioritize client-side transactions: build and send transactions directly
+  from the browser using the connected wallet adapter (`useWallet`,
+  `useConnection`). Avoid introducing a backend/API route unless the student
+  explicitly asks for one.
+- Every on-chain write (create mint, mint tokens, transfer) must be a real,
+  signed devnet transaction — never mock or fake a transaction signature.
+- After any successful transaction, surface the signature with a link to
+  `https://explorer.solana.com/tx/<signature>?cluster=devnet`.
+
+## UI
+- Use TailwindCSS exclusively for styling (no CSS-in-JS, no plain CSS files
+  beyond `globals.css`).
+- Default to a dark-mode UI: dark backgrounds, light text, high-contrast
+  accent color for primary actions (Create Token, Mint, Send).
+- Keep the UI on a single page/dashboard. Make wallet balance, token balance,
+  and the Send/Receive actions the primary visual focus.
+- Use `react-hot-toast` (already a dependency) for transaction notifications.
+
+## Workflow
+- Prefer editing the existing scaffold (`src/app`, `src/components`) over
+  creating a new project structure.
+- Do not wait for user confirmation between reasonable, low-risk edits during
+  the live-coding flow — implement the full feature in one pass, then let the
+  student review the running app.
