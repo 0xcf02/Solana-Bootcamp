@@ -35,7 +35,7 @@ Antes de começar, certifique-se de que você tem:
 - **Node.js 20+** (verifique com `node -v`)
 - **npm ou yarn** instalado
 - **Git** instalado
-- Uma conta em **Phantom Wallet** ou outra wallet de sua preferencia.
+- Uma conta em **Soflare Wallet** ou outra wallet de sua preferencia (Backpack, Phantom...).
 - **Terminal/Git Bash** (recomendado)
 - **Rust** (veja Instalação abaixo)
 - **Solana CLI** (veja Instalação abaixo)
