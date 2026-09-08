@@ -1,20 +1,24 @@
 {
   "name": "Solana Bootcamp - SuperBank",
-  "image": "mcr.microsoft.com/devcontainers/rust:1",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "rust-lang.rust-analyzer",
-        "tamasfe.even-better-toml",
-        "iron-wallet.solana-wallet-adapter"
+        "iron-wallet.solana-wallet-adapter",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint"
       ]
     }
   },
-  "remoteUser": "vscode",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
+  "remoteUser": "node",
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js App",
+      "onAutoForward": "notify"
     }
-  },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y locales && sudo locale-gen en_US.UTF-8 && curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash && sudo ln -sf /home/vscode/.local/share/solana/install/active_release/bin/* /usr/local/bin/ && sudo ln -sf /home/vscode/.avm/bin/anchor /usr/local/bin/anchor && npm install"
+  }
 }
