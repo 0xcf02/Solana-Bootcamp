@@ -7,7 +7,7 @@ Site oficial: [superteam.com.br](https://www.superteam.com.br/pt) · X/Twitter: 
 
 Bem-vindo ao Bootcamp de Solana! Este repositório contém tudo que você precisa para começar a desenvolver aplicações descentralizadas (dApps) na blockchain Solana.
 
-## 📚 Índice (Navegável)
+## 📚 Índice
 
 **Início Rápido:**
 - [📋 Pré-requisitos](#-pré-requisitos)
