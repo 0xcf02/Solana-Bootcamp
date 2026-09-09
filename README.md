@@ -12,6 +12,7 @@ Welcome to the Solana Bootcamp! This repository has everything you need to start
 **Quick Start:**
 - [📋 Prerequisites](#-prerequisites)
 - [📦 Installation](#-installation)
+- [☁️ Cloud Environment (GitHub Codespaces)](#️-cloud-environment-github-codespaces)
 
 **Development:**
 - [⚙️ Initial Setup](#️-initial-setup)
@@ -181,6 +182,27 @@ cd solana-bootcamp
 # Install Node.js dependencies
 npm install
 ```
+
+---
+
+## ☁️ Cloud Environment (GitHub Codespaces)
+
+Don't want to install Docker or any local dependencies? You can run this entire project in the browser using **GitHub Codespaces**, which builds the same [Dev Container](.devcontainer) used for local development directly in the cloud.
+
+1. Go to the repository page on GitHub.
+2. Click the green **Code** button.
+3. Select the **Codespaces** tab.
+4. Click **Create codespace on main**.
+
+GitHub will build the `.devcontainer` image (Rust, Solana CLI, Anchor CLI, and the SuperBank Next.js scaffold) in the cloud and open a full VS Code environment in your browser — no local installation required. Once it's ready, open a terminal inside the Codespace and run:
+
+```bash
+npm run dev
+```
+
+Codespaces forwards the port automatically, so you can open the app straight from the **Ports** tab.
+
+> 💡 GitHub's free tier includes a monthly quota of Codespaces usage hours. Remember to stop or delete your Codespace when you're done for the day to avoid using up your quota.
 
 ---
 
