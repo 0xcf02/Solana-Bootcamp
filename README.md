@@ -36,7 +36,7 @@ Before you start, make sure you have:
 - **npm or yarn** installed
 - **Git** installed
 - An account on **Solflare Wallet** or another wallet of your choice (Backpack, Phantom...).
-- **Terminal/Git Bash** (recommended)
+- **Terminal:** native terminal on Linux/macOS; **WSL2 (Ubuntu)** on Windows (see Installation). Git Bash alone is **not** enough for Rust/Anchor.
 - **Rust** (see Installation below)
 - **Solana CLI** (see Installation below)
 - **Anchor CLI** (see Installation below)
@@ -48,7 +48,22 @@ Before you start, make sure you have:
 
 ## 📦 Installation
 
-### ⚡ Quick Install (Recommended)
+> **Which OS are you on?**
+>
+> - 🐧 **Linux / macOS** → follow [Option A](#️-option-a-linux--macos)
+> - 🪟 **Windows** → you have two choices:
+>   - [Option B: WSL2](#-option-b-windows-via-wsl2-recommended) (**recommended** — full Unix toolchain, everything in this guide works)
+>   - [Option C: Dev Container](#️-option-c-any-os--dev-container-docker) (no local setup at all, works on any OS)
+>
+> ⚠️ **Do NOT try to build Solana/Anchor programs natively on Windows**
+> (PowerShell, CMD, or plain Git Bash). Rust/Anchor tooling on MSVC is
+> unreliable for Solana development. Use WSL2 or Docker instead.
+
+### 🅰️ Option A: Linux & macOS
+
+Everything below runs as-is in your native terminal.
+
+#### ⚡ Quick Install (Recommended)
 
 The fastest way is to install everything with **a single command**. This official Solana installer sets up your whole environment in one go:
 
@@ -74,104 +89,95 @@ Yarn: 1.22.1
 rustc --version && solana --version && anchor --version && surfpool --version && node --version && yarn --version
 ```
 
----
+> 💡 **If the quick installer fails**, install each tool individually:
+>
+> 1. **Rust:**
+>    ```bash
+>    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+>    . "$HOME/.cargo/env"
+>    ```
+> 2. **Solana CLI:**
+>    ```bash
+>    sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
+>    export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"  # add to ~/.bashrc or ~/.zshrc
+>    ```
+> 3. **Anchor (via AVM):**
+>    ```bash
+>    cargo install --git https://github.com/solana-foundation/anchor avm --force
+>    avm install latest && avm use latest
+>    ```
+> 4. **Surfpool (optional):**
+>    ```bash
+>    curl -sL https://run.surfpool.run/ | bash
+>    ```
 
-### ✋ Individual Installation (If the Quick Install Fails)
+### 🅱️ Option B: Windows via WSL2 (Recommended)
 
-If the quick installer runs into trouble, you can install each tool individually:
+WSL2 (**Windows Subsystem for Linux**) gives you a real Ubuntu environment inside Windows. All Solana, Rust, and Anchor tooling works perfectly there — this is the setup the Solana Foundation recommends for Windows users.
 
-### 1️⃣ Installing Rust
+#### 1️⃣ Install WSL2 (one-time, in PowerShell **as Administrator**)
 
-Rust is required to compile Solana programs.
-
-```bash
-# Install Rust using rustup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-# Reload your environment
-. "$HOME/.cargo/env"
-
-# Verify installation
-rustc --version
+```powershell
+wsl --install
 ```
 
-**Expected:** `rustc 1.86.0` or higher
+That single command installs WSL2 + the default Ubuntu distro. **Reboot** when prompted, then open the new **Ubuntu** app from the Start menu and create your Linux username/password.
 
----
+> 💡 On older Windows builds, enable it manually:
+> ```powershell
+> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+> dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+> ```
+> Then reboot and run `wsl --set-default-version 2`.
+>
+> Requirements: Windows 10 version 2004+ (build 19041+) or Windows 11.
 
-### 2️⃣ Installing Solana CLI
+#### 2️⃣ Install Node.js inside WSL
 
-The Solana CLI provides all the tools needed to build and deploy programs.
+Ubuntu doesn't ship Node by default — use nvm:
 
 ```bash
-# Install the Solana CLI
-sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
-
-# Update your PATH (if needed)
-# On Linux/WSL/Mac:
-export PATH="/Users/test/.local/share/solana/install/active_release/bin:$PATH"
-
-# On Windows (Git Bash), add it to your .bashrc or .zshrc:
-echo 'export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bashrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 source ~/.bashrc
-
-# Verify installation
-solana --version
+nvm install --lts
+node -v   # expect v20+
 ```
 
-**Expected:** `solana-cli 2.x.x` or higher
+#### 3️⃣ Install the Solana toolchain
+
+From here on, **everything works exactly like Option A** — run the same commands inside the Ubuntu terminal:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
+```
+
+Verify:
+
+```bash
+rustc --version && solana --version && anchor --version && node --version
+```
+
+#### 4️⃣ Use your project from Windows
+
+- **VS Code (recommended):** open a terminal in WSL and run `code .` — VS Code will install the **WSL extension** and open the project inside Linux.
+- **Git in WSL:** clone the repo inside WSL (e.g. `~/projects/`), not on `/mnt/c/...`. Files on the Windows drive are ~10x slower for Rust builds.
+- **Browsers, Phantom, etc.:** run as normal Windows apps — `http://localhost:3000` from WSL is reachable from your Windows browser.
+- **Windows Terminal** (from the Microsoft Store) is the nicest way to run both PowerShell and Ubuntu tabs side by side.
+
+### 🅾️ Option C: Any OS — Dev Container (Docker)
+
+Don't want to install anything? The repo ships a **Dev Container** with Rust, Solana CLI, Anchor, and the SuperBank scaffold pre-installed:
+
+1. Install **Docker Desktop** ([Windows](https://www.docker.com/products/docker-desktop/) — enable the *WSL2 backend* during install if asked, / [macOS](https://www.docker.com/products/docker-desktop/) / Linux).
+2. Install **VS Code** + the **Dev Containers** extension.
+3. Open this repo → command palette (`Ctrl/Cmd + Shift + P`) → **"Dev Containers: Reopen in Container"**.
+4. Run `npm run dev` and open `http://localhost:3000`.
+
+This is the zero-friction path for bootcamp day one — you can set up WSL2 or a native toolchain later.
 
 ---
 
-### 3️⃣ Installing Anchor CLI
-
-Anchor is a framework that simplifies building Solana programs in Rust.
-
-**Option A: Install via AVM (Recommended)**
-
-```bash
-# Install the Anchor Version Manager
-cargo install --git https://github.com/solana-foundation/anchor avm --force
-
-# Install the latest Anchor version
-avm install latest
-avm use latest
-
-# Verify installation
-anchor --version
-```
-
-**Option B: Install Directly**
-
-```bash
-# If AVM has issues, install straight from GitHub
-cargo install --git https://github.com/solana-foundation/anchor anchor-cli --force
-
-# Verify
-anchor --version
-```
-
-**Expected:** `anchor-cli 0.30.x` or higher
-
----
-
-### 4️⃣ Installing Surfpool CLI (Optional but Recommended)
-
-Surfpool is a local development tool that replaces `solana-test-validator` with more features.
-
-```bash
-# Install Surfpool
-curl -sL https://run.surfpool.run/ | bash
-
-# Verify installation
-surfpool --version
-```
-
-**Expected:** `surfpool 0.12.0` or higher
-
----
-
-### 5️⃣ Cloning the Repository and Installing Dependencies
+### 5️⃣ Cloning the Repository and Installing Dependencies (All options)
 
 ```bash
 # Clone this repository
@@ -677,7 +683,11 @@ Script 11 uses port 8080.
 
 ```bash
 # Use a different port
+# Linux/macOS/WSL2
 PORT=3000 npx tsx src/11-solana-actions.ts
+
+# Windows PowerShell (if NOT using WSL2/Dev Container)
+$env:PORT=3000; npx tsx src/11-solana-actions.ts
 ```
 
 ---
